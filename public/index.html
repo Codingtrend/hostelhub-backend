@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>HostelHub - Home</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      color: #333;
+      overflow-x: hidden;
+    }
+
+    /* FULLSCREEN BACKGROUND LANDING SECTION */
+    .hero-section {
+      background: url('images/hostel2.jpg') no-repeat center center/cover;
+      height: 100vh;
+      position: relative;
+    }
+
+    .hero-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      background-color: rgba(255, 255, 255, 0.3); /* Transparent overlay */
+      z-index: 1;
+    }
+
+    .top-buttons {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      z-index: 2;
+      display: flex;
+      gap: 10px;
+    }
+
+    .btn {
+      padding: 10px 18px;
+      text-decoration: none;
+      background-color: #eee;
+      color: #333;
+      border-radius: 6px;
+      font-weight: bold;
+      transition: background 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ccc;
+    }
+
+    .btn.dark {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: 150px;
+    }
+
+    .hero-content h1 {
+      font-size: 4rem;
+      color: #000;
+    }
+
+    .subtitle {
+      font-size: 1.2rem;
+      margin: 10px 0 30px;
+      font-style: italic;
+    }
+
+    .role-cards {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .card {
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: 25px 20px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+      width: 260px;
+      cursor: pointer;
+      transition: transform 0.3s ease, border 0.3s ease;
+      border: 2px solid transparent;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    .card.selected {
+      border: 2px solid #000;
+      background-color: rgba(255, 255, 255, 0.85);
+    }
+
+    #common-continue {
+      display: inline-block;
+      padding: 12px 20px;
+      background-color: #000;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: 20px;
+      opacity: 0.5;
+      pointer-events: none;
+      transition: opacity 0.3s;
+    }
+
+    #common-continue.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    #feature-rotator {
+      font-size: 1.8rem;
+      color: #555;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .highlight-text {
+      color: #555;
+    }
+
+    /* WHITE SECTION STARTS */
+    .white-section {
+      background-color: #fff;
+      padding: 80px 20px;
+      margin-top: 50px;
+    }
+
+    .video-section {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 auto 60px;
+      max-width: 1000px;
+      gap: 30px;
+      flex-wrap: wrap;
+    }
+
+    .video-wrapper {
+      flex: 1;
+      max-width: 480px;
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    .video-description {
+      flex: 1;
+      max-width: 460px;
+      font-size: 1.1rem;
+      font-weight: 500;
+    }
+
+    .faq-section {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .faq-section h2 {
+      text-align: center;
+      margin-bottom: 25px;
+      font-size: 1.8rem;
+    }
+
+    .faq {
+      margin-bottom: 15px;
+      padding: 10px 15px;
+      background-color: #f9f9f9;
+      border-radius: 6px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    }
+
+    .faq strong {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 1.05rem;
+    }
+
+    .faq p {
+      margin: 0;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Hero / Landing Section -->
+  <section class="hero-section">
+    <div class="top-buttons">
+      <a href="login.html" class="btn">Login</a>
+      <a href="register.html" class="btn dark">Register</a>
+    </div>
+
+    <div class="hero-content">
+      <h1>HostelHub</h1>
+      <div id="feature-rotator"></div>
+      <p class="subtitle">Seamless hostel living with smart management for students, wardens & admins.</p>
+
+      <h2>Select Your Role</h2>
+      <div class="role-cards">
+        <div class="card" data-link="student.html">
+          <img src="icons/student.png" alt="Student Icon" width="60" height="60">
+          <h3>Student</h3>
+          <p>Access hostel info, make requests, and track complaints.</p>
+        </div>
+        <div class="card" data-link="warden.html">
+          <img src="icons/warden.png" alt="Warden Icon" width="60" height="60">
+          <h3>Warden</h3>
+          <p>Manage students, approve requests, and oversee hostel operations.</p>
+        </div>
+        <div class="card" data-link="admin.html">
+          <img src="icons/admin.png" alt="Admin Icon" width="60" height="60">
+          <h3>Admin</h3>
+          <p>Control system, manage hostels and users, generate reports.</p>
+        </div>
+      </div>
+
+      <a href="#" id="common-continue">Continue</a>
+    </div>
+  </section>
+
+  <!-- White Background Scroll Area -->
+  <div class="white-section">
+
+    <!-- Video and Description Section -->
+    <div class="video-section">
+      <div class="video-description">
+        <h3>See HostelHub in Action</h3>
+        <p>Explore how HostelHub makes student life easier. Watch this short preview of how our system supports students, wardens, and admins to ensure smooth hostel operations.</p>
+      </div>
+      <div class="video-wrapper">
+        <video src="images/hostelclip.mp4" autoplay muted loop></video>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2>Frequently Asked Questions</h2>
+      <div class="faq">
+        <strong>Q: What is HostelHub?</strong>
+        <p>A: HostelHub is an all-in-one hostel management system for students, wardens, and administrators.</p>
+      </div>
+      <div class="faq">
+        <strong>Q: How do I register as a student?</strong>
+        <p>A: Click on 'Register' at the top and choose your role as Student.</p>
+      </div>
+      <div class="faq">
+        <strong>Q: Can I change my room after allotment?</strong>
+        <p>A: Yes, requests can be made through the student dashboard and approved by the warden.</p>
+      </div>
+      <div class="faq">
+        <strong>Q: Is my data secure?</strong>
+        <p>A: Yes, we prioritize user data security with encrypted access and admin controls.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const featureRotatorElement = document.getElementById('feature-rotator');
+    const coreFeatures = [
+      "Manage Hostel Admissions",
+      "Simplify Room Allotment",
+      "Access Student Records Instantly",
+      "Track Fee Payments Easily",
+      "Monitor Hostel Inventory",
+      "Efficient Warden Communication",
+      "Stay Updated with Hostel Notices"
+    ];
+
+    let index = 0;
+    let isDeleting = false;
+    let text = '';
+    function typeEffect() {
+      const fullText = coreFeatures[index];
+      if (isDeleting) {
+        text = fullText.substring(0, text.length - 1);
+      } else {
+        text = fullText.substring(0, text.length + 1);
+      }
+
+      featureRotatorElement.innerHTML = `<span class="highlight-text">Highlight:</span> <span class="highlight-text">${text}</span>`;
+
+      if (!isDeleting && text === fullText) {
+        setTimeout(() => {
+          isDeleting = true;
+          typeEffect();
+        }, 2000);
+        return;
+      } else if (isDeleting && text === '') {
+        isDeleting = false;
+        index = (index + 1) % coreFeatures.length;
+      }
+
+      setTimeout(typeEffect, isDeleting ? 60 : 100);
+    }
+
+    typeEffect();
+
+    const cards = document.querySelectorAll('.card');
+    const continueBtn = document.getElementById('common-continue');
+    let selectedLink = '';
+
+    cards.forEach(card => {
+      card.addEventListener('click', () => {
+        cards.forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedLink = card.getAttribute('data-link');
+        continueBtn.href = selectedLink;
+        continueBtn.classList.add('active');
+      });
+    });
+  </script>
+</body>
+</html>
