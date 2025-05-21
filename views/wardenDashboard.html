@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Warden Dashboard | HostelHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0077b6;
+      --bg: #f7f9fb;
+      --white: #ffffff;
+      --dark: #2c3e50;
+      --card-shadow: rgba(0, 0, 0, 0.05);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background: #121212;
+      color: #f1f1f1;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 260px;
+      background-color: var(--white);
+      padding: 30px 20px;
+      box-shadow: 2px 0 10px var(--card-shadow);
+      position: sticky;
+      top: 0;
+    }
+    body.dark-mode .sidebar {
+      background-color: #1e1e1e;
+    }
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: var(--primary);
+      text-align: center;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin-bottom: 16px;
+    }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 10px 15px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    body.dark-mode .sidebar ul li a {
+      color: #f1f1f1;
+    }
+    .sidebar ul li a:hover {
+      background-color: #e9f9f1;
+      color: var(--primary);
+    }
+    .main {
+      flex-grow: 1;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 30px;
+      background: var(--white);
+      box-shadow: 0 2px 8px var(--card-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    body.dark-mode .navbar {
+      background: #1e1e1e;
+    }
+    .navbar input {
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .navbar .icons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 20px;
+    }
+    .toggle-btn {
+      cursor: pointer;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px;
+      background: linear-gradient(to right, #e0f7f1, #f7f9fb);
+    }
+    .header img {
+      width: 60px;
+      border-radius: 50%;
+    }
+    .welcome {
+      font-size: 20px;
+      color: var(--primary);
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 30px;
+    }
+    .card {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+    }
+    body.dark-mode .card {
+      background: #232323;
+    }
+    .card h3 {
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .card button {
+      display: block;
+      width: 100%;
+      margin-bottom: 12px;
+      padding: 12px;
+      border: none;
+      background-color: var(--primary);
+      color: white;
+      font-weight: 500;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .card button:hover {
+      background-color: #0077b6;
+    }
+    .notification, .event {
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+    .status-label {
+      font-weight: bold;
+    }
+    .view-all {
+      color: var(--primary);
+      font-weight: 500;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>🔐 WardenHub</h2>
+      <ul>
+        <li><a href="#">📋 Student Records</a></li>
+        <li><a href="#">🏢 Room Allocation</a></li>
+        <li><a href="#">🛠️ Complaints Management</a></li>
+        <li><a href="#">📅 Leave Approvals</a></li>
+        <li><a href="#">🧹 Cleanliness Tracker</a></li>
+        <li><a href="#">📢 Broadcast Notice</a></li>
+        <li><a href="#">📊 Reports & Logs</a></li>
+        <li><a href="#">⚙️ Settings</a></li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div class="navbar">
+        <input type="text" placeholder="Search student, room, etc..." />
+        <div class="icons">
+          <span id="notifIcon">🔔</span>
+          <span>🧑‍💼</span>
+          <span class="toggle-btn" onclick="toggleDarkMode()" id="modeIcon">🌙</span>
+        </div>
+      </div>
+
+      <div class="header">
+        <div>
+          <div class="welcome">Welcome, Warden Sharma</div>
+          <p>Hostel: B-Block | Total Students: 120</p>
+          <p><strong id="date"></strong></p>
+        </div>
+        <img src="https://i.pravatar.cc/150?img=65" alt="Warden Profile">
+      </div>
+
+      <div class="card-container">
+        <div class="card">
+          <h3>Quick Actions</h3>
+          <button>Approve Leave Requests</button>
+          <button>View Complaints</button>
+          <button>Allocate Rooms</button>
+        </div>
+
+        <div class="card">
+          <h3>Latest Complaints</h3>
+          <div class="notification">🚿 Shower not working - Room 304</div>
+          <div class="notification">💡 Light flickering - Room 212</div>
+          <span class="view-all">🔍 View All</span>
+        </div>
+
+        <div class="card">
+          <h3>Leave Summary</h3>
+          <p>Pending Requests: <span class="status-label">3</span></p>
+          <p>Approved: 12 | Rejected: 4</p>
+        </div>
+
+        <div class="card">
+          <h3>Maintenance Schedule</h3>
+          <p class="event">🧰 Plumber Visit – May 17, 9 AM</p>
+          <p class="event">🧼 Cleaning Drive – May 18</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const modeIcon = document.getElementById("modeIcon");
+      modeIcon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+    function updateDate() {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const today = new Date().toLocaleDateString('en-US', options);
+      document.getElementById('date').textContent = today;
+    }
+
+    updateDate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,128 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  /* Original background color removed as we're adding an image background */
+  color: #333;
+
+  /* --- ADDED FOR FADED BACKGROUND IMAGE --- */
+  background-image: url('images/hostel2.jpg'); /* <--- IMPORTANT: Replace 'images/background-image.jpg' with the actual path to your image */
+  background-size: cover; /* Ensures the image covers the entire body */
+  background-position: center center; /* Centers the image */
+  background-attachment: fixed; /* Makes the background image fixed when scrolling (optional, but often looks nice) */
+  /*
+    For the fade effect, we'll use a pseudo-element to avoid making the content transparent.
+    Alternatively, for a simple faded background *color*, you could use:
+    background-color: rgba(245, 247, 250, 0.7); // Original body background color with 70% opacity
+  */
+  position: relative;
+  min-height: 100vh; /* Needed for the pseudo-element positioning */
+  z-index: 0; /* Ensure body is a stacking context, though default usually works */
+}
+
+
+body::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.4); /* Your faded overlay */
+  z-index: -1;
+}
+
+
+
+.top-buttons {
+  display: flex;
+  justify-content: flex-end;
+  padding: 20px;
+  gap: 10px;
+}
+
+.btn {
+  padding: 10px 18px;
+  text-decoration: none;
+  background-color: #eee;
+  color: #333;
+  border-radius: 6px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn:hover {
+  background-color: #ccc;
+}
+
+.btn.dark {
+  background-color: #000;
+  color: #fff;
+}
+
+.container {
+  text-align: center;
+  max-width: 1000px;
+  margin: 30px auto;
+  padding: 0 20px;
+  position: relative; /* Ensure container content is above the body::before overlay */
+  z-index: 1; /* Make sure content is above the background overlay */
+}
+
+h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.1rem;
+  color: #666;
+}
+
+h2 {
+  margin: 40px 0 20px;
+  font-size: 1.8rem;
+}
+
+.role-cards {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: rgba(255, 255, 255, 0.6); /* White with 80% opacity */
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  width: 260px;
+  transition: transform 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.icon {
+  font-size: 40px; /* Assuming this was for something like Font Awesome icons */
+  margin-bottom: 10px;
+}
+
+.card img { /* Added a rule for your image icons */
+  margin-bottom: 10px;
+}
+
+.card button {
+  margin-top: 15px;
+  padding: 10px 16px;
+  background-color: #000000;
+  border: none;
+  color: white;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card button:hover {
+  background-color: #000000;
+}
