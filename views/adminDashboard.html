@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Admin Dashboard | HostelHub</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0077b6;
+      --bg: #f4f6f9;
+      --white: #ffffff;
+      --dark: #2c3e50;
+      --card-shadow: rgba(0, 0, 0, 0.05);
+    }
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: var(--bg);
+      color: var(--dark);
+      transition: background 0.3s, color 0.3s;
+    }
+    body.dark-mode {
+      background: #121212;
+      color: #f1f1f1;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 270px;
+      background-color: var(--white);
+      padding: 30px 20px;
+      box-shadow: 2px 0 10px var(--card-shadow);
+      position: sticky;
+      top: 0;
+    }
+    body.dark-mode .sidebar {
+      background-color: #1e1e1e;
+    }
+    .sidebar h2 {
+      font-size: 22px;
+      margin-bottom: 30px;
+      color: var(--primary);
+      text-align: center;
+    }
+    .sidebar ul {
+      list-style: none;
+    }
+    .sidebar ul li {
+      margin-bottom: 16px;
+    }
+    .sidebar ul li a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      padding: 10px 15px;
+      display: block;
+      border-radius: 8px;
+      transition: 0.3s;
+    }
+    body.dark-mode .sidebar ul li a {
+      color: #f1f1f1;
+    }
+    .sidebar ul li a:hover {
+      background-color: #e2f0fb;
+      color: var(--primary);
+    }
+    .main {
+      flex-grow: 1;
+    }
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 30px;
+      background: var(--white);
+      box-shadow: 0 2px 8px var(--card-shadow);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+    body.dark-mode .navbar {
+      background: #1e1e1e;
+    }
+    .navbar input {
+      padding: 8px 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .navbar .icons {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      font-size: 20px;
+    }
+    .toggle-btn {
+      cursor: pointer;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 30px;
+      background: linear-gradient(to right, #d0eaff, #f4f6f9);
+    }
+    .header img {
+      width: 60px;
+      border-radius: 50%;
+    }
+    .welcome {
+      font-size: 20px;
+      color: var(--primary);
+    }
+    .card-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      padding: 30px;
+    }
+    .card {
+      background-color: var(--white);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 12px var(--card-shadow);
+    }
+    body.dark-mode .card {
+      background: #232323;
+    }
+    .card h3 {
+      margin-bottom: 18px;
+      font-size: 18px;
+      color: var(--primary);
+    }
+    .card ul {
+      list-style: none;
+      padding-left: 0;
+    }
+    .card ul li {
+      margin-bottom: 8px;
+      font-size: 14px;
+    }
+    .card ul li::before {
+      content: "📌 ";
+    }
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .sidebar {
+        width: 100%;
+        border-bottom: 1px solid #eee;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="sidebar">
+      <h2>🏛️ AdminHub</h2>
+      <ul>
+        <li><a href="#">🏨 Hostel Management</a></li>
+        <li><a href="#">👥 User Management</a></li>
+        <li><a href="#">🛠️ Complaints Oversight</a></li>
+        <li><a href="#">🍽️ Mess Oversight</a></li>
+        <li><a href="#">📅 Attendance Reports</a></li>
+        <li><a href="#">🏥 Hospital Visit Logs</a></li>
+        <li><a href="#">🧹 Cleanliness Tracker</a></li>
+        <li><a href="#">📢 Broadcasts</a></li>
+      </ul>
+    </div>
+
+    <div class="main">
+      <div class="navbar">
+        <input type="text" placeholder="Search hostel, student, report..." />
+        <div class="icons">
+          <span>🔔</span>
+          <span>👨‍💼</span>
+          <span class="toggle-btn" onclick="toggleDarkMode()" id="modeIcon">🌙</span>
+        </div>
+      </div>
+
+      <div class="header">
+        <div>
+          <div class="welcome">Welcome, Admin</div>
+          <p><strong id="date"></strong></p>
+        </div>
+        <img src="https://i.pravatar.cc/150?img=52" alt="Admin Profile">
+      </div>
+
+      <div class="card-container">
+        <div class="card">
+          <h3>🏨 Hostel Management</h3>
+          <ul>
+            <li>Add/Edit/Delete Hostels</li>
+            <li>Assign Wardens to Hostels</li>
+            <li>View Hostel Overview</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>👥 User Management</h3>
+          <ul>
+            <li>Add/Edit/Delete Students</li>
+            <li>Add/Edit/Delete Wardens</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🛠️ Complaints Oversight</h3>
+          <ul>
+            <li>View All Complaints</li>
+            <li>Filter by Hostel, Type, Status</li>
+            <li>Assign Technicians (optional)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🍽️ Mess Oversight</h3>
+          <ul>
+            <li>View Milk Allotment Reports</li>
+            <li>View Khichdi Reports</li>
+            <li>View Food Menus (All Hostels)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>📅 Attendance Reports</h3>
+          <ul>
+            <li>View Night Attendance Logs</li>
+            <li>Generate Monthly Attendance Reports</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🏥 Hospital Visit Logs</h3>
+          <ul>
+            <li>View All Hostel Requests (with status)</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>🧹 Cleanliness Tracker</h3>
+          <ul>
+            <li>View Cleanliness Status (All Hostels)</li>
+            <li>Generate Reports</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>📢 Broadcasts</h3>
+          <ul>
+            <li>Send Notices to All Hostels</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleDarkMode() {
+      document.body.classList.toggle("dark-mode");
+      const modeIcon = document.getElementById("modeIcon");
+      modeIcon.textContent = document.body.classList.contains("dark-mode") ? "☀️" : "🌙";
+    }
+
+    function updateDate() {
+      const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+      const today = new Date().toLocaleDateString('en-US', options);
+      document.getElementById('date').textContent = today;
+    }
+
+    updateDate();
+  </script>
+</body>
+</html>
