@@ -3,6 +3,7 @@ const path = require('path');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const connectDB = require('./config/db');
+require('dotenv').config();
 
 const studentRoutes = require('./routes/studentRoutes');
 const wardenRoutes = require('./routes/wardenRoutes');
@@ -27,7 +28,7 @@ app.use('/views', express.static(path.join(__dirname, '../public/views')));
 
 // Home page route
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/home.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Dashboard route - serves studentDashboard.html from views folder
