@@ -9,20 +9,16 @@
       margin: 0;
       padding: 0;
     }
-
     body {
       font-family: 'Segoe UI', sans-serif;
       color: #333;
       overflow-x: hidden;
     }
-
-    /* FULLSCREEN BACKGROUND LANDING SECTION */
     .hero-section {
       background: url('images/hostel2.jpg') no-repeat center center/cover;
       height: 100vh;
       position: relative;
     }
-
     .hero-section::before {
       content: '';
       position: absolute;
@@ -30,10 +26,9 @@
       left: 0;
       height: 100%;
       width: 100%;
-      background-color: rgba(255, 255, 255, 0.3); /* Transparent overlay */
+      background-color: rgba(255, 255, 255, 0.3);
       z-index: 1;
     }
-
     .top-buttons {
       position: absolute;
       top: 20px;
@@ -42,7 +37,6 @@
       display: flex;
       gap: 10px;
     }
-
     .btn {
       padding: 10px 18px;
       text-decoration: none;
@@ -52,34 +46,28 @@
       font-weight: bold;
       transition: background 0.3s;
     }
-
     .btn:hover {
       background-color: #ccc;
     }
-
     .btn.dark {
       background-color: #000;
       color: #fff;
     }
-
     .hero-content {
       position: relative;
       z-index: 2;
       text-align: center;
       padding-top: 150px;
     }
-
     .hero-content h1 {
       font-size: 4rem;
       color: #000;
     }
-
     .subtitle {
       font-size: 1.2rem;
       margin: 10px 0 30px;
       font-style: italic;
     }
-
     .role-cards {
       display: flex;
       justify-content: center;
@@ -87,7 +75,6 @@
       flex-wrap: wrap;
       margin-bottom: 20px;
     }
-
     .card {
       background-color: rgba(255, 255, 255, 0.6);
       padding: 25px 20px;
@@ -98,16 +85,13 @@
       transition: transform 0.3s ease, border 0.3s ease;
       border: 2px solid transparent;
     }
-
     .card:hover {
       transform: translateY(-5px);
     }
-
     .card.selected {
       border: 2px solid #000;
       background-color: rgba(255, 255, 255, 0.85);
     }
-
     #common-continue {
       display: inline-block;
       padding: 12px 20px;
@@ -123,30 +107,24 @@
       pointer-events: none;
       transition: opacity 0.3s;
     }
-
     #common-continue.active {
       opacity: 1;
       pointer-events: auto;
     }
-
     #feature-rotator {
       font-size: 1.8rem;
       color: #555;
       font-weight: bold;
       margin-top: 10px;
     }
-
     .highlight-text {
       color: #555;
     }
-
-    /* WHITE SECTION STARTS */
     .white-section {
       background-color: #fff;
       padding: 80px 20px;
       margin-top: 50px;
     }
-
     .video-section {
       display: flex;
       justify-content: center;
@@ -156,36 +134,30 @@
       gap: 30px;
       flex-wrap: wrap;
     }
-
     .video-wrapper {
       flex: 1;
       max-width: 480px;
     }
-
     .video-wrapper video {
       width: 100%;
       border-radius: 10px;
       box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
-
     .video-description {
       flex: 1;
       max-width: 460px;
       font-size: 1.1rem;
       font-weight: 500;
     }
-
     .faq-section {
       max-width: 1000px;
       margin: 0 auto;
     }
-
     .faq-section h2 {
       text-align: center;
       margin-bottom: 25px;
       font-size: 1.8rem;
     }
-
     .faq {
       margin-bottom: 15px;
       padding: 10px 15px;
@@ -193,22 +165,131 @@
       border-radius: 6px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.05);
     }
-
     .faq strong {
       display: block;
       margin-bottom: 5px;
       font-size: 1.05rem;
     }
-
     .faq p {
       margin: 0;
       color: #333;
     }
+   
+  #chat-box {
+    position: fixed;
+    bottom: 80px;
+    right: 30px;
+    width: 320px;
+    max-height: 420px;
+    display: none;
+    flex-direction: column;
+    border-radius: 16px;
+    backdrop-filter: blur(12px);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+    z-index: 1000;
+  }
+
+  #chat-header {
+    background: #000;
+    color: #fff;
+    padding: 14px;
+    font-weight: bold;
+    text-align: center;
+    font-size: 16px;
+    border-bottom: 1px solid #ccc;
+  }
+
+  #chat-messages {
+    padding: 10px;
+    flex-grow: 1;
+    overflow-y: auto;
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  #chat-messages div {
+    padding: 8px 12px;
+    border-radius: 16px;
+    max-width: 85%;
+    word-wrap: break-word;
+    line-height: 1.4;
+  }
+
+  #chat-messages div:nth-child(odd) {
+    align-self: flex-end;
+    background-color: #000;
+    color: #fff;
+  }
+
+  #chat-messages div:nth-child(even) {
+    align-self: flex-start;
+    background-color: #f1f1f1;
+    color: #333;
+  }
+
+  #chat-input-area {
+    display: flex;
+    border-top: 1px solid #ddd;
+  }
+
+  #chat-input {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    background: rgba(255, 255, 255, 0.9);
+  }
+
+  #chat-input-area button {
+    padding: 10px 14px;
+    background: #000;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+  #chat-icon {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background: #000;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 16px;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 1001;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    transition: transform 0.3s ease;
+  }
+
+  #chat-icon:hover {
+    transform: scale(1.1);
+  }
+
+  @media (max-width: 500px) {
+    #chat-box {
+      width: 90%;
+      right: 5%;
+      bottom: 90px;
+    }
+  }
+
+
   </style>
 </head>
 <body>
 
-  <!-- Hero / Landing Section -->
+  <!-- Hero Section -->
   <section class="hero-section">
     <div class="top-buttons">
       <a href="login.html" class="btn">Login</a>
@@ -243,10 +324,8 @@
     </div>
   </section>
 
-  <!-- White Background Scroll Area -->
+  <!-- White Section -->
   <div class="white-section">
-
-    <!-- Video and Description Section -->
     <div class="video-section">
       <div class="video-description">
         <h3>See HostelHub in Action</h3>
@@ -257,7 +336,6 @@
       </div>
     </div>
 
-    <!-- FAQ Section -->
     <div class="faq-section">
       <h2>Frequently Asked Questions</h2>
       <div class="faq">
@@ -277,9 +355,20 @@
         <p>A: Yes, we prioritize user data security with encrypted access and admin controls.</p>
       </div>
     </div>
-
   </div>
 
+  <!-- ChatBot -->
+  <div id="chat-box">
+    <div id="chat-header">HostelBot 🤖</div>
+    <div id="chat-messages"></div>
+    <div id="chat-input-area">
+      <input type="text" id="chat-input" placeholder="Ask me about hostel..." />
+      <button onclick="sendChat()">➤</button>
+    </div>
+  </div>
+  <button id="chat-icon">💬</button>
+
+  <!-- Scripts -->
   <script>
     const featureRotatorElement = document.getElementById('feature-rotator');
     const coreFeatures = [
@@ -291,40 +380,25 @@
       "Efficient Warden Communication",
       "Stay Updated with Hostel Notices"
     ];
-
-    let index = 0;
-    let isDeleting = false;
-    let text = '';
+    let index = 0, isDeleting = false, text = '';
     function typeEffect() {
       const fullText = coreFeatures[index];
-      if (isDeleting) {
-        text = fullText.substring(0, text.length - 1);
-      } else {
-        text = fullText.substring(0, text.length + 1);
-      }
-
+      text = isDeleting ? fullText.substring(0, text.length - 1) : fullText.substring(0, text.length + 1);
       featureRotatorElement.innerHTML = `<span class="highlight-text">Highlight:</span> <span class="highlight-text">${text}</span>`;
-
       if (!isDeleting && text === fullText) {
-        setTimeout(() => {
-          isDeleting = true;
-          typeEffect();
-        }, 2000);
+        setTimeout(() => { isDeleting = true; typeEffect(); }, 2000);
         return;
       } else if (isDeleting && text === '') {
         isDeleting = false;
         index = (index + 1) % coreFeatures.length;
       }
-
       setTimeout(typeEffect, isDeleting ? 60 : 100);
     }
-
     typeEffect();
 
     const cards = document.querySelectorAll('.card');
     const continueBtn = document.getElementById('common-continue');
     let selectedLink = '';
-
     cards.forEach(card => {
       card.addEventListener('click', () => {
         cards.forEach(c => c.classList.remove('selected'));
@@ -334,6 +408,52 @@
         continueBtn.classList.add('active');
       });
     });
+
+    const chatIcon = document.getElementById("chat-icon");
+    const chatBox = document.getElementById("chat-box");
+    const chatMessages = document.getElementById("chat-messages");
+    const chatInput = document.getElementById("chat-input");
+
+    chatIcon.addEventListener("click", () => {
+      chatBox.style.display = chatBox.style.display === "none" ? "flex" : "none";
+    });
+
+    function sendChat() {
+      const message = chatInput.value.trim();
+      if (!message) return;
+
+      const userMsg = document.createElement("div");
+      userMsg.textContent = "You: " + message;
+      chatMessages.appendChild(userMsg);
+
+      fetch("https://openrouter.ai/api/v1/chat/completions", {
+        method: "POST",
+        headers: {
+          "Authorization": "Bearer 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", // REPLACE THIS
+          "Content-Type": "application/json",
+          "HTTP-Referer": "https://your-site.com"
+        },
+        body: JSON.stringify({
+          model: "openai/gpt-3.5-turbo",
+          messages: [{ role: "user", content: message }]
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        const reply = data.choices?.[0]?.message?.content || "Bot did not respond.";
+        const botReply = document.createElement("div");
+        botReply.textContent = "Bot: " + reply;
+        chatMessages.appendChild(botReply);
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+      })
+      .catch(() => {
+        const botReply = document.createElement("div");
+        botReply.textContent = "Bot: Sorry! Something went wrong.";
+        chatMessages.appendChild(botReply);
+      });
+
+      chatInput.value = "";
+    }
   </script>
 </body>
 </html>

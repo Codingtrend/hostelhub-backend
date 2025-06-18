@@ -1,24 +1,26 @@
 const Student = require('../models/Student');
 const bcrypt = require('bcrypt');
 
+// Register Student
 const registerStudent = async (req, res) => {
-  let { name, rollNumber, email, password, roomAllocated, hostelName } = req.body;
-
-  if (!name || !rollNumber || !email || !password) {
-    return res.status(400).json({ message: 'Please fill all required fields.' });
-  }
-
-  email = email.toLowerCase(); // Normalize email
-
   try {
-    const existingStudent = await Student.findOne({ $or: [{ email }, { rollNumber }] });
+    let { name, rollNumber, email, password, roomAllocated, hostelName } = req.body;
+
+    if (!name || !rollNumber || !email || !password) {
+      return res.status(400).json({ success: false, message: 'All required fields must be filled.' });
+    }
+
+    email = email.toLowerCase();
+
+    const existingStudent = await Student.findOne({
+      $or: [{ email }, { rollNumber }]
+    });
+
     if (existingStudent) {
-      return res.status(409).json({ message: 'Email or Roll Number already exists.' });
+      return res.status(409).json({ success: false, message: 'Email or Roll Number already exists.' });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log("Original password:", password);
-    console.log("Hashed password:", hashedPassword);
 
     const newStudent = new Student({
       name,
@@ -26,53 +28,57 @@ const registerStudent = async (req, res) => {
       email,
       password: hashedPassword,
       roomAllocated,
-      hostelName,
-      // No need to explicitly set role here if default is set in schema
+      hostelName
     });
 
     await newStudent.save();
-    res.status(201).json({ message: 'Student registered successfully 🎉' });
+
+    res.status(201).json({
+      success: true,
+      message: 'Student registered successfully 🎉',
+      studentId: newStudent._id,
+      role: newStudent.role
+    });
+
   } catch (error) {
     console.error("Registration error:", error);
-    res.status(500).json({ message: 'Error registering student' });
+    res.status(500).json({ success: false, message: 'Registration failed. Please try again.' });
   }
 };
 
+// Login Student
 const loginStudent = async (req, res) => {
-  let { email, password } = req.body;
-
-  if (!email || !password) {
-    return res.status(400).json({ message: 'Email and password are required.' });
-  }
-
-  email = email.toLowerCase(); // Normalize email
-
   try {
+    let { email, password } = req.body;
+
+    if (!email || !password) {
+      return res.status(400).json({ success: false, message: 'Email and password are required.' });
+    }
+
+    email = email.toLowerCase();
+
     const student = await Student.findOne({ email });
 
     if (!student) {
-      return res.status(404).json({ message: 'No student found with this email.' });
+      return res.status(404).json({ success: false, message: 'No student found with this email.' });
     }
-
-    console.log("Entered password:", password);
-    console.log("Stored hashed password:", student.password);
 
     const isMatch = await bcrypt.compare(password, student.password);
-    console.log("Password match result:", isMatch);
 
     if (!isMatch) {
-      return res.status(401).json({ message: 'Incorrect password.' });
+      return res.status(401).json({ success: false, message: 'Invalid credentials' });
     }
 
-    // Include role in the response for frontend to handle redirection if needed
-    res.status(200).json({ 
-      message: 'Login successful ✅', 
+    res.status(200).json({
+      success: true,
+      message: 'Login successful ✅',
       studentId: student._id,
-      role: student.role  // <-- added role here
+      role: student.role
     });
+
   } catch (error) {
     console.error("Login error:", error);
-    res.status(500).json({ message: 'Login failed. Try again.' });
+    res.status(500).json({ success: false, message: 'Login failed. Please try again.' });
   }
 };
 

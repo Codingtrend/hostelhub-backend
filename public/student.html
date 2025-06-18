@@ -9,61 +9,60 @@
     <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
     <style>
         body {
-            background-color: #f8f9fa; /* Light grey/white background (fallback) */
+            background-color: #f8f9fa;
             font-family: 'Poppins', sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
             height: 100vh;
             margin: 0;
-            /* Add your background image here */
-            background-image: url('images/register.jpg'); /* Replace with your image URL */
-            background-size: cover; /* Cover the entire body */
-            background-repeat: no-repeat; /* Do not repeat the image */
-            background-position: center; /* Center the image */
+            background-image: url('images/register.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
         }
 
         .card {
-            background-color: rgba(255, 255, 255, 0.4); /* Semi-transparent white card background */
+            background-color: rgba(255, 255, 255, 0.4);
             border-radius: 12px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
-            width: auto; /* Allow width to adjust based on content */
-            max-width: 450px; /* Increase this value to make it broader */
-            max-height: 550px; /* Decrease this value to make it shorter (adjust as needed) */
-            display: flex; /* Use flexbox for better control over content layout */
-            flex-direction: column; /* Stack content vertically */
-            position: relative; /* To position the back button absolutely */
+            width: auto;
+            max-width: 450px;
+            max-height: 550px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
             padding: 20px;
         }
 
         .nav-tabs {
-            border-bottom: 2px solid #dee2e6; /* Light grey bottom border for tabs */
-            margin-top: 40px; /* Adjust margin to accommodate back button */
+            border-bottom: 2px solid #dee2e6;
+            margin-top: 40px;
         }
 
         .nav-tabs .nav-link {
             border: none;
             font-weight: 500;
-            color: #495057; /* Dark grey text for tabs */
+            color: #495057;
             background-color: transparent;
             margin-bottom: -2px;
             padding: 10px 20px;
         }
 
         .nav-tabs .nav-link:hover {
-            color: #000; /* Black text on hover */
+            color: #000;
         }
 
         .nav-tabs .nav-link.active {
-            color: #000; /* Black text for active tab */
-            border-bottom: 3px solid #000; /* Black bottom border for active tab */
+            color: #000;
+            border-bottom: 3px solid #000;
         }
 
         .form-control {
-            background-color: rgba(248, 249, 250, 0.8); /* Slightly transparent light input background */
-            color: #495057; /* Dark grey text for input */
-            border: 1px solid #ced4da; /* Light grey border */
+            background-color: rgba(248, 249, 250, 0.8);
+            color: #495057;
+            border: 1px solid #ced4da;
             border-radius: 6px;
             margin-bottom: 18px;
             padding: 10px 15px;
@@ -72,12 +71,12 @@
         .form-control:focus {
             background-color: #fff;
             color: #495057;
-            border-color: #000; /* Black border on focus */
-            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1); /* Subtle focus shadow */
+            border-color: #000;
+            box-shadow: 0 0 0 0.2rem rgba(0, 0, 0, 0.1);
         }
 
         .btn-primary {
-            background-color: #000; /* Black button background */
+            background-color: #000;
             color: #fff;
             border: none;
             border-radius: 6px;
@@ -88,7 +87,7 @@
         }
 
         .btn-primary:hover {
-            background-color: #333; /* Darker shade on hover */
+            background-color: #333;
         }
 
         .password-toggle {
@@ -96,7 +95,7 @@
             right: 15px;
             top: 38px;
             cursor: pointer;
-            color: #6c757d; /* Medium grey for the icon */
+            color: #6c757d;
         }
 
         .form-group {
@@ -105,7 +104,7 @@
         }
 
         label {
-            color: #343a40; /* Dark grey for labels */
+            color: #343a40;
             margin-bottom: 6px;
             display: block;
             font-weight: 400;
@@ -122,23 +121,23 @@
             font-size: 1rem;
             cursor: pointer;
             font-weight: 600;
-            border: none; /* Remove default border */
+            border: none;
         }
 
         .back-button:focus {
-            border: 1px solid black; /* Black border on focus */
-            outline: none; /* Remove default outline */
+            border: 1px solid black;
+            outline: none;
         }
 
         .back-button:hover {
-            background-color: #f8f9fa; /* Slight hover effect */
+            background-color: #f8f9fa;
         }
     </style>
 </head>
 <body>
 
     <div class="card p-4">
-        <button class="back-button" onclick="window.location.href='home.html'">
+        <button class="back-button" onclick="window.location.href='index.html'">
             <i class="fas fa-arrow-left"></i> Back
         </button>
         <ul class="nav nav-tabs justify-content-center mb-4" id="authTabs" role="tablist">
@@ -258,10 +257,18 @@
             });
 
             const result = await res.json();
-            alert(res.ok ? 'Registration successful!' : result.message || 'Registration failed');
+
+            if (res.ok) {
+                alert('Registration successful! Please login.');
+                document.getElementById('login-tab').click();
+                document.getElementById('loginEmail').value = data.email;
+                document.getElementById('loginPassword').value = data.password;
+            } else {
+                alert(result.message || 'Registration failed');
+            }
         });
 
-        // Login Form Handler
+        // Login Form Handler with Role-based Redirect
         document.getElementById('loginForm').addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -279,8 +286,15 @@
             const result = await res.json();
 
             if (res.ok) {
-                // Redirect to dashboard page on successful login
-                window.location.href = 'student-dashboard.html';
+                if (result.role === 'student') {
+                    window.location.href = 'student-dashboard.html';
+                } else if (result.role === 'warden') {
+                    window.location.href = 'warden-dashboard.html';
+                } else if (result.role === 'admin') {
+                    window.location.href = 'admin-dashboard.html';
+                } else {
+                    alert('Login successful, but role is unknown!');
+                }
             } else {
                 alert(result.message || 'Login failed');
             }
